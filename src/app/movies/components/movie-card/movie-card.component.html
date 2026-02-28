@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-body">
+    <h6>{{ movie.title }}</h6><hr>
+
+    <p class="card-text text-muted">
+      {{ movie.description }}
+    </p>
+
+    <p><strong>Rating:</strong> {{ movie.rating }}</p>
+
+    {{ movie.watched ? 'Watched' : 'Not Watched' }}
+
+    <div class="card-footer">
+      <button class="btn btn-outline-primary p-1 me-1" (click)="onView()">View</button>
+      <button class="btn btn-outline-secondary p-1 me-1" (click)="onEdit()">Edit</button>
+      <button class="btn btn-outline-danger p-1 me-1" (click)="onDelete()">Delete</button>
+    </div>
+  </div>
+</div>
