@@ -1,4 +1,11 @@
 <div class="card">
+  <img
+    [src]="movie.image_url" 
+    class="card-img-top" 
+    [alt]="movie.title"
+    style="object-fit: cover; height: 200px;"
+  >
+  
   <div class="card-body">
     <h6>{{ movie.title }}</h6><hr>
 
@@ -11,9 +18,9 @@
     {{ movie.watched ? 'Watched' : 'Not Watched' }}
 
     <div class="card-footer">
-      <button class="btn btn-outline-primary p-1 me-1" (click)="onView()">View</button>
-      <button class="btn btn-outline-secondary p-1 me-1" (click)="onEdit()">Edit</button>
-      <button class="btn btn-outline-danger p-1 me-1" (click)="onDelete()">Delete</button>
+      <button class="btn btn-sm btn-outline-primary p-1 me-2" (click)="onView()">View</button>
+      <button class="btn btn-sm btn-outline-secondary p-1 me-2" (click)="onEdit()">Edit</button>
+      <button class="btn btn-sm btn-outline-danger p-1 me-2" (click)="onDelete()">Delete</button>
     </div>
   </div>
 </div>

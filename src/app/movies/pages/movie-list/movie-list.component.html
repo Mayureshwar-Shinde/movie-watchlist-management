@@ -1,7 +1,19 @@
+
+<button class="btn btn-primary mb-3 mt-3" (click)="toggleForm()">
+  {{ showForm ? 'Close Form' : 'Add Movie' }}
+</button>
+
+@if (showForm) {
+  <add-movie [movie]="movie" (addMovie)="addMovie($event)" (closeForm)="toggleForm()"></add-movie><br>
+}
+
 <div class="row g-3">
   @for (movie of movies; track movie.srno) {
     <div class="col-6 col-lg-3">
-      <movie [movie]="movie" (deleteMovie)="deleteMovie($event)"></movie>
+      <movie-card [movie]="movie"
+          (deleteMovie)="deleteMovie($event)"
+          (editMovie)="editMovie($event)"
+      ></movie-card>
     </div>
   }
 </div>

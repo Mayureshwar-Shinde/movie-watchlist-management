@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { MovieCardComponent } from '../../../movies/components/movie-card/movie-card.component';
 import { Movie } from '../../models/movie';
-import { MovieComponent } from "../../components/movie-card/movie-card.component";
+import { AddMovieComponent } from '../add-movie/add-movie.component';
 
 @Component({
   selector: 'movie-list',
   standalone: true,
-  imports: [MovieComponent],
+  imports: [MovieCardComponent, AddMovieComponent],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.css'
 })
 export class MovieListComponent implements OnInit {
   movies: Movie[] = new Array();
+  movie!: Movie;
+  showForm: boolean = false;
 
   constructor() {
     this.movies = [
@@ -55,6 +58,19 @@ export class MovieListComponent implements OnInit {
         image_url: 'https://i.ytimg.com/vi/isOGD_7hNIY/maxresdefault.jpg'
       }
     ];
+
+    this.resetMovie();
+  }
+
+  resetMovie() {
+    this.movie = {
+      srno: 0,
+      title: '',
+      description: '',
+      rating: 0.0,
+      watched: false,
+      image_url: ''
+    };
   }
 
   ngOnInit(): void {
@@ -64,5 +80,44 @@ export class MovieListComponent implements OnInit {
     this.movies = this.movies.filter(
       currentMovie => currentMovie.srno != movie.srno
     );
+  }
+
+  validateMovie(movie: Movie): boolean {
+    const title = movie.title?.trim();
+    const description = movie.description?.trim();
+    const imageUrl = movie.image_url?.trim();
+    const rating = movie.rating;
+
+    if (!title || !description || !imageUrl || rating === null || rating === undefined || rating <= 0) {
+      return false;
+    }
+    return true;
+  }
+
+  addMovie(movie: Movie) {
+    if(!this.validateMovie(movie)) return;
+    if(!movie.srno) {
+      movie.srno = this.movies.length + 1;
+      this.movies = [...this.movies, movie];
+    } else {
+      this.movies = this.movies.map(
+        m => m.srno === movie.srno ? { ...m, ...movie } : m
+      );
+    }
+    this.resetMovie();
+    this.showForm = false;
+  }
+
+  editMovie(updatedMovie: Movie) {
+    this.movie = updatedMovie;
+    this.showForm = true;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  toggleForm() {
+    this.showForm = !this.showForm;
+    if (!this.showForm) {
+      this.resetMovie();
+    }
   }
 }
