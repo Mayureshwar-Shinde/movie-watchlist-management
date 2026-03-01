@@ -1,0 +1,62 @@
+.yt-navbar {
+  height: 56px;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo */
+.yt-logo {
+  color: #ff0000;
+  font-size: 26px;
+}
+
+.yt-brand-text {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* Icon buttons */
+.yt-icon-btn {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.yt-icon-btn:hover {
+  background: #f2f2f2;
+}
+
+/* Search */
+.yt-search {
+  width: 40%;
+  max-width: 600px;
+}
+
+.yt-search-input {
+  border-radius: 20px 0 0 20px;
+  border-right: none;
+}
+
+.yt-search-btn {
+  border-radius: 0 20px 20px 0;
+  background: #f8f8f8;
+  border: 1px solid #ced4da;
+}
+
+.yt-search-btn:hover {
+  background: #e5e5e5;
+}
+
+/* Avatar */
+.yt-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+}

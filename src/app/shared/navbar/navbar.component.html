@@ -1,36 +1,42 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+<nav class="yt-navbar navbar navbar-expand-lg px-3">
+  <!-- Left -->
+  <div class="d-flex align-items-center">
+    <button class="btn yt-icon-btn me-2">
+      <i class="bi bi-list"></i>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
+
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <i class="bi bi-youtube yt-logo me-1"></i>
+      <span class="yt-brand-text">MyTube</span>
+    </a>
+  </div>
+
+  <!-- Center Search -->
+  <form class="yt-search mx-auto d-flex">
+    <input
+      class="form-control yt-search-input"
+      type="search"
+      placeholder="Search"
+    />
+    <button class="btn yt-search-btn" type="submit">
+      <i class="bi bi-search"></i>
+    </button>
+  </form>
+
+  <!-- Right -->
+  <div class="d-flex align-items-center gap-2">
+    <button class="btn yt-icon-btn">
+      <i class="bi bi-camera-video"></i>
+    </button>
+
+    <button class="btn yt-icon-btn">
+      <i class="bi bi-bell"></i>
+    </button>
+
+    <img
+      src="https://i.pravatar.cc/40"
+      class="yt-avatar"
+      alt="profile"
+    />
   </div>
 </nav>

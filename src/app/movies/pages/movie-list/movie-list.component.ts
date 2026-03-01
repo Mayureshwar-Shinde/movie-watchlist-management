@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MovieCardComponent } from '../../../movies/components/movie-card/movie-card.component';
 import { Movie } from '../../models/movie';
 import { AddMovieComponent } from '../add-movie/add-movie.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'movie-list',
   standalone: true,
-  imports: [MovieCardComponent, AddMovieComponent],
+  imports: [MovieCardComponent, AddMovieComponent, CommonModule],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.css'
 })

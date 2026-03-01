@@ -1,26 +1,34 @@
-<div class="card">
-  <img
-    [src]="movie.image_url" 
-    class="card-img-top" 
-    [alt]="movie.title"
-    style="object-fit: cover; height: 200px;"
-  >
-  
-  <div class="card-body">
-    <h6>{{ movie.title }}</h6><hr>
+<div class="yt-card">
+  <!-- Thumbnail -->
+  <div class="yt-thumb">
+    <img
+      [src]="movie.image_url"
+      [alt]="movie.title"
+    />
+    <span class="yt-badge">
+      {{ movie.watched ? 'Watched' : 'New' }}
+    </span>
+  </div>
 
-    <p class="card-text text-muted">
+  <!-- Info -->
+  <div class="yt-info">
+    <h6 class="yt-title" title="{{ movie.title }}">
+      {{ movie.title }}
+    </h6>
+
+    <p class="yt-desc">
       {{ movie.description }}
     </p>
 
-    <p><strong>Rating:</strong> {{ movie.rating }}</p>
+    <div class="yt-meta">
+      ⭐ {{ movie.rating }}
+    </div>
 
-    {{ movie.watched ? 'Watched' : 'Not Watched' }}
-
-    <div class="card-footer">
-      <button class="btn btn-sm btn-outline-primary p-1 me-2" (click)="onView()">View</button>
-      <button class="btn btn-sm btn-outline-secondary p-1 me-2" (click)="onEdit()">Edit</button>
-      <button class="btn btn-sm btn-outline-danger p-1 me-2" (click)="onDelete()">Delete</button>
+    <!-- Actions -->
+    <div class="yt-actions">
+      <button class="btn btn-sm btn-outline-primary" (click)="onView()">View</button>
+      <button class="btn btn-sm btn-outline-secondary" (click)="onEdit()">Edit</button>
+      <button class="btn btn-sm btn-outline-danger" (click)="onDelete()">Delete</button>
     </div>
   </div>
 </div>

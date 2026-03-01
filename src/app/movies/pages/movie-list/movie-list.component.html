@@ -1,6 +1,10 @@
 
-<button class="btn btn-primary mb-3 mt-3" (click)="toggleForm()">
-  {{ showForm ? 'Close Form' : 'Add Movie' }}
+<button
+  class="yt-add-btn mb-3 mt-3 d-flex align-items-center gap-2"
+  (click)="toggleForm()"
+>
+  <i class="bi" [ngClass]="showForm ? 'bi-x-lg' : 'bi-plus-lg'"></i>
+  <span>{{ showForm ? 'Close' : 'Add Movie' }}</span>
 </button>
 
 @if (showForm) {
