@@ -19,7 +19,7 @@ export class AddMovieComponent {
   }
 
   resetForm() {
-    this.movie.srno = 0;
+    this.movie.id = 0;
   }
 
   onClose() {

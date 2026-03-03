@@ -1,9 +1,9 @@
 
 export interface Movie {
-  srno: number;
+  id: number;
   title: string;
   description: string;
   rating: number;
   watched: boolean;
-  image_url: string;
+  thumbnail: string;
 }
