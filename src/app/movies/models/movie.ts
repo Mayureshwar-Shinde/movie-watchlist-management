@@ -7,3 +7,14 @@ export interface Movie {
   watched: boolean;
   thumbnail: string;
 }
+
+export interface CreateMovie {
+  title: string;
+  description: string;
+  rating: number;
+  watched: boolean;
+  thumbnail: string;
+}
+
+
+

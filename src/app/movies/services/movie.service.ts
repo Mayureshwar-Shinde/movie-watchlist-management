@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Movie } from '../models/movie';
+import { CreateMovie, Movie } from '../models/movie';
 import { ApiResponse } from '../models/api-response';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class MovieService {
     );
   }
 
-  addMovie(movie: Movie): Observable<Movie> {
+  addMovie(movie: CreateMovie): Observable<Movie> {
     return this.http.post<ApiResponse<Movie>>(this.baseUrl, movie).pipe(
       map(response => response.data)
     );

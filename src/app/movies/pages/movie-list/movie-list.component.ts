@@ -36,16 +36,17 @@ export class MovieListComponent implements OnInit {
   }
 
   loadMovies() {
-    this.movieService.getAllMovies().subscribe(
-      movies => this.movies = movies,
-      err => console.error('Failed to load movies', err)
-    );
-  }
+  this.movieService.getAllMovies().subscribe({
+    next: movies => this.movies = movies,
+    error: err => console.error('Failed to load movies', err)
+  });
+}
 
   deleteMovie(movie: Movie) {
-    this.movies = this.movies.filter(
-      currentMovie => currentMovie.id != movie.id
-    );
+    this.movieService.deleteMovie(movie.id).subscribe({
+      next: () => this.loadMovies(),
+      error: err => console.error('Failed to delete movie', err)
+    });
   }
 
   validateMovie(movie: Movie): boolean {
@@ -62,13 +63,17 @@ export class MovieListComponent implements OnInit {
 
   addMovie(movie: Movie) {
     if(!this.validateMovie(movie)) return;
+    const { id, ...moviePayload } = movie;
     if(!movie.id) {
-      movie.id = this.movies.length + 1;
-      this.movies = [...this.movies, movie];
+      this.movieService.addMovie(moviePayload).subscribe({
+        next: () => this.loadMovies(),
+        error: err => console.error('Failed to add movie', err)
+      });
     } else {
-      this.movies = this.movies.map(
-        m => m.id === movie.id ? { ...m, ...movie } : m
-      );
+      this.movieService.updateMovie(movie).subscribe({
+        next: () => this.loadMovies(),
+        error: err => console.error('Failed to update movie', err)
+      });
     }
     this.resetMovie();
     this.showForm = false;
