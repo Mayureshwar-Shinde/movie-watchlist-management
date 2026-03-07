@@ -1,57 +1,90 @@
 <div class="container py-4">
   @if(isLoading) {
+    <!-- Loader -->
     <div class="text-center p-5">
       <div class="spinner-border"></div>
     </div>
-  }
-  @else if (movie) {
-    <div class="card movie-details shadow-sm">
-      <button type="button" class="back-arrow" aria-label="Go back" (click)="goBack()">
-        <span class="back-arrow-icon">く</span>
-      </button>
+  } @else if(movie) {
+    <div class="watch-card">
+      <!-- Video-style header -->
+      <div class="watch-video-wrapper">
+        <button type="button" class="back-arrow" aria-label="Go back" (click)="goBack()">
+          <span class="back-arrow-icon">&lt; Back</span>
+        </button>
+        <img class="watch-video" [src]="movie.thumbnail" [alt]="movie.title" />
+      </div>
 
-      <img
-        class="movie-poster"
-        [src]="movie.thumbnail"
-        [alt]="movie.title"
-      />
+      <div class="watch-content">
+        <!-- Title -->
+        <h1 class="watch-title">
+          {{ movie.title }}
+        </h1>
 
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-start mb-3 gap-3 flex-wrap">
-          <h2 class="movie-title mb-0">{{ movie.title }}</h2>
-          <span class="badge rounded-pill status" [class.bg-success]="movie.watched" [class.bg-warning]="!movie.watched">
-            {{ movie.watched ? 'Watched' : 'New' }}
-          </span>
+        <!-- Meta row (YouTube-inspired, but for watchlist) -->
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 watch-meta-row">
+          <div class="watch-meta">
+            <span class="value">⭐ {{ movie.rating }}/10</span>
+            <span class="dot">•</span>
+            <span class="date">25 Nov 2025</span>
+            <span class="dot">•</span>
+            <span class="watch-badge" [class.watched]="movie.watched">
+              {{ movie.watched ? 'Watched' : 'In watchlist' }}
+            </span>
+          </div>
+
+          <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn-edit-movie" (click)="startEdit()">{{ isEditing ? 'Close x' : 'Edit'}}</button>
+            <button type="button" class="btn-delete-movie" (click)="deleteMovie()">Delete</button>
+          </div>
         </div>
 
-        <p class="movie-description mb-4">
-          {{ movie.description }}
-        </p>
-
-        <div class="meta-row">
-          <span class="label">Rating</span>
-          <span class="value">⭐ {{ movie.rating }}/10</span>
-        </div>
-        <div class="meta-row">
-          <span class="label">Movie ID</span>
-          <span class="value">#{{ movie.id }}</span>
+        <!-- Rating + description -->
+        <div class="watch-description mt-3">
+          <!-- <div class="meta-row">
+            <span class="label">Rating</span>
+            <span class="value">⭐ {{ movie.rating }}/10</span>
+          </div> -->
+          <p class="movie-description mb-0 mt-2">
+            {{ movie.description }}
+          </p>
         </div>
 
-        <section class="screenshots mt-4">
-          <h5 class="screenshots-title">Screenshots</h5>
-          <div class="screenshots-grid">
-            @for (screenshot of screenshots; track screenshot) {
-              <img class="screenshot-img" [src]="screenshot" [alt]="movie.title + ' screenshot'" />
+        @if (isEditing) {
+          <div class="edit-section mt-4">
+            <h5 class="mb-3">Edit movie</h5>
+            <add-movie [movie]="editingMovie" (addMovie)="saveMovie($event)" (closeForm)="cancelEdit()"></add-movie>
+          </div>
+        }
+
+        <!-- Screenshots (spoiler-protected) -->
+        @if(screenshots.length) {
+          <div class="screenshots-spoiler mt-4">
+            <button type="button" class="btn-toggle-screenshots" (click)="toggleScreenshots()">
+              {{ showScreenshots ? 'Hide screenshots' : 'Reveal screenshots (may contain spoilers)' }}
+            </button>
+
+            @if(showScreenshots) {
+              <section class="screenshots mt-3">
+                <h5 class="screenshots-title">Screenshots</h5>
+                <div class="screenshots-grid">
+                  @for (screenshot of screenshots; track screenshot) {
+                    <img
+                      class="screenshot-img"
+                      [src]="screenshot"
+                      [alt]="movie.title + ' still'"
+                    />
+                  }
+                </div>
+              </section>
             }
           </div>
-        </section>
+        }
       </div>
     </div>
   } @else {
-    <div class="card empty-state text-center p-4 shadow-sm">
-      <h4 class="mb-2">No movie selected</h4>
-      <p class="text-muted mb-3">Open this page using the View button from the movie list.</p>
-      <a routerLink="/" class="btn btn-primary">Go to movie list</a>
+    <div class="text-center">
+      <p>Page not Found!</p>
+      <a routerLink="/" class="btn btn-primary">Go back to home</a>
     </div>
   }
 </div>

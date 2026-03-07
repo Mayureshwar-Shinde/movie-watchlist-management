@@ -1,0 +1,26 @@
+1. show 'update' instead of add for form after clicking edit
+2. scroll down to the form when edit is clicked
+3. increase the form width in edit panel
+4. check once whether the delete method is implemented correctly inside view-moivie ts
+5. re-clicking edit closes the form and while form is open 'edit' changes to 'close'
+6. keep movie id blank instead of 0 in form
+7. validations(rating above 0 and below/equal 10)
+8. google search with title and release year
+
+
+1. add release date in backend
+
+add rotten tomatoes rating
+fix back arrow button on view-movie page
+
+add sorting, filtering, pagination
+error handling, notifications
+
+user based, login, navbar, sidebar
+auditing, schedulers, notifications
+
+containerization, dockerfile, orchestration, jenkins setup
+backend and frontend in one folder
+
+industry standards, best practice
+
