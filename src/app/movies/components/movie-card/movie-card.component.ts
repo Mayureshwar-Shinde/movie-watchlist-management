@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Movie } from '../../models/movie';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'movie-card',
@@ -13,10 +14,10 @@ export class MovieCardComponent {
   @Output() editMovie: EventEmitter<Movie> = new EventEmitter();
   @Output() deleteMovie: EventEmitter<Movie> = new EventEmitter();
 
+  constructor(private router: Router) {}
+
   onView() {
-    const query = encodeURIComponent(this.movie.title);
-    const url = `https://www.google.com/search?q=${query}`;
-    window.open(url, '_blank');
+    this.router.navigate(['/movie', this.movie.id]);
   }
 
   onEdit() {
@@ -25,6 +26,8 @@ export class MovieCardComponent {
   }
 
   onDelete() {
-    this.deleteMovie.emit(this.movie);
+    if(confirm('Are you sure?')) {
+      this.deleteMovie.emit(this.movie);
+    }
   }
 }

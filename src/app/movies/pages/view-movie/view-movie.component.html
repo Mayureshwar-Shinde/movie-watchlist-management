@@ -1,0 +1,57 @@
+<div class="container py-4">
+  @if(isLoading) {
+    <div class="text-center p-5">
+      <div class="spinner-border"></div>
+    </div>
+  }
+  @else if (movie) {
+    <div class="card movie-details shadow-sm">
+      <button type="button" class="back-arrow" aria-label="Go back" (click)="goBack()">
+        <span class="back-arrow-icon">く</span>
+      </button>
+
+      <img
+        class="movie-poster"
+        [src]="movie.thumbnail"
+        [alt]="movie.title"
+      />
+
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-3 gap-3 flex-wrap">
+          <h2 class="movie-title mb-0">{{ movie.title }}</h2>
+          <span class="badge rounded-pill status" [class.bg-success]="movie.watched" [class.bg-warning]="!movie.watched">
+            {{ movie.watched ? 'Watched' : 'New' }}
+          </span>
+        </div>
+
+        <p class="movie-description mb-4">
+          {{ movie.description }}
+        </p>
+
+        <div class="meta-row">
+          <span class="label">Rating</span>
+          <span class="value">⭐ {{ movie.rating }}/10</span>
+        </div>
+        <div class="meta-row">
+          <span class="label">Movie ID</span>
+          <span class="value">#{{ movie.id }}</span>
+        </div>
+
+        <section class="screenshots mt-4">
+          <h5 class="screenshots-title">Screenshots</h5>
+          <div class="screenshots-grid">
+            @for (screenshot of screenshots; track screenshot) {
+              <img class="screenshot-img" [src]="screenshot" [alt]="movie.title + ' screenshot'" />
+            }
+          </div>
+        </section>
+      </div>
+    </div>
+  } @else {
+    <div class="card empty-state text-center p-4 shadow-sm">
+      <h4 class="mb-2">No movie selected</h4>
+      <p class="text-muted mb-3">Open this page using the View button from the movie list.</p>
+      <a routerLink="/" class="btn btn-primary">Go to movie list</a>
+    </div>
+  }
+</div>

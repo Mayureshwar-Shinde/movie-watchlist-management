@@ -19,6 +19,12 @@ export class MovieService {
     );
   }
 
+  getMovie(id: number): Observable<Movie> {
+    return this.http.get<ApiResponse<Movie>>(`${this.baseUrl}/${id}`).pipe(
+      map(response => response.data)
+    );
+  }
+
   addMovie(movie: CreateMovie): Observable<Movie> {
     return this.http.post<ApiResponse<Movie>>(this.baseUrl, movie).pipe(
       map(response => response.data)

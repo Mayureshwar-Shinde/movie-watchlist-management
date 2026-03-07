@@ -77,6 +77,7 @@ export class MovieListComponent implements OnInit {
     }
     this.resetMovie();
     this.showForm = false;
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
 
   editMovie(updatedMovie: Movie) {
