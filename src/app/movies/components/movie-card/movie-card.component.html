@@ -1,10 +1,15 @@
 <div class="movie-card">
-  <div class="movie-card-thumbnail" (click)="onView()">
+  <div class="thumbnail" (click)="onView()">
     <img [src]="movie.thumbnail" [alt]="movie.title">
-    <span class="movie-rating-badge">
+    <span class="rating-badge">
       ⭐ {{ movie.rating }}
     </span>
-    @if (movie.watched) { <span class="movie-status-badge">✓</span> }
+    @if (movie.watched) {
+      <span class="status-badge">✓</span>
+    }
+    <span class="release-date">
+      25 Nov 2026
+    </span>
   </div>
   
   <div class="movie-card-body mt-2">
