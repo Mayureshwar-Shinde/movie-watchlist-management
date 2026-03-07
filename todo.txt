@@ -6,6 +6,7 @@
 6. keep movie id blank instead of 0 in form
 7. validations(rating above 0 and below/equal 10)
 8. google search with title and release year
+9. add prod/dev environment setup in angular
 
 
 1. add release date in backend
