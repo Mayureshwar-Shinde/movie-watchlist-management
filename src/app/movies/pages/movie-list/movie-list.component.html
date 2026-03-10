@@ -4,7 +4,10 @@
 </button>
 
 @if (showForm) {
-  <add-movie [movie]="movie" (addMovie)="addMovie($event)" (closeForm)="toggleForm()"></add-movie><br>
+  <div class="border rounded col-6 mx-auto mb-3">
+    <h5 class="m-0 mt-3 ms-3">Add Movie</h5>
+    <add-movie [movie]="movie" (addMovie)="addMovie($event)" (closeForm)="toggleForm()"></add-movie><br>
+  </div>
 }
 
 <div class="row g-3">

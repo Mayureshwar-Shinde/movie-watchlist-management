@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Movie } from '../../models/movie';
@@ -8,7 +8,7 @@ import { AddMovieComponent } from '../add-movie/add-movie.component';
 @Component({
   selector: 'app-view-movie',
   standalone: true,
-  imports: [RouterLink, AddMovieComponent],
+  imports: [RouterLink, AddMovieComponent, CommonModule],
   templateUrl: './view-movie.component.html',
   styleUrl: './view-movie.component.css'
 })
@@ -20,6 +20,7 @@ export class ViewMovieComponent implements OnInit {
   showScreenshots: boolean = false;
   isEditing: boolean = false;
   editingMovie!: Movie;
+  isImageError = false;
 
   constructor(
     private router: Router,
@@ -70,6 +71,7 @@ export class ViewMovieComponent implements OnInit {
         this.movie = movie;
         this.screenshots = this.createStubScreenshots();
         this.isEditing = false;
+        this.isImageError = false;
       },
       error: err => console.error('Failed to update movie', err)
     });
@@ -89,5 +91,23 @@ export class ViewMovieComponent implements OnInit {
       return;
     }
     this.router.navigateByUrl('/');
+  }
+
+  handleImageError(event: Event) {
+    this.isImageError = true;
+    const img = event.target as HTMLImageElement;
+    img.src = 'https://img.freepik.com/premium-photo/bright-dark-black-golden-colors-smooth-gradient-solid-background_730620-280133.jpg?semt=ais_user_personalization&w=740&q=80';
+  }
+
+  formatDuration(minutes: number): string {
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    if (h === 0) return `${m}m`;
+    return `${h}h ${m}m`;
+  }
+
+  toggleWatched() {
+    this.movie.watched = !this.movie.watched;
+    this.saveMovie(this.movie);
   }
 }

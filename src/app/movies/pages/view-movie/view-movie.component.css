@@ -1,6 +1,46 @@
+.movie-layout {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  transition: all 0.35s ease;
+}
+
+.movie-side {
+  transition: all 0.35s ease;
+}
+
+/* default centered */
+.movie-layout:not(.edit-mode) .movie-side {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* edit mode shifts movie left */
+.movie-layout.edit-mode {
+  justify-content: flex-start;
+}
+
+.movie-layout.edit-mode .movie-side {
+  flex: 0 0 60%;
+}
+
+.edit-side {
+  flex: 0 0 40%;
+}
+
+.edit-panel {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 20px;
+}
+
+
 /* Centered detail card with YouTube-inspired header */
 .watch-card {
-  max-width: 961px;
+  max-width: 800px;
   margin: 0 auto;
   background: #ffffff;
   border-radius: 16px;
@@ -117,6 +157,7 @@
 .watch-meta .dot {
   font-size: 1.2rem;
   line-height: 1;
+  color: black;
 }
 
 .movie-description {
@@ -220,9 +261,34 @@
   border: none;
 }
 
+.screenshots-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.btn-close-screenshots {
+  border: none;
+  background: transparent;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+  color: #444;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.btn-close-screenshots:hover {
+  transform: scale(1.15);
+  color: #000;
+  border: solid #f5f5f5 0.5px;
+}
+
 .screenshots-title {
   font-weight: 700;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.80rem;
 }
 
 .screenshots-grid {
@@ -266,4 +332,66 @@
   .screenshots-grid {
     grid-template-columns: 1fr;
   }
+}
+
+
+/* -------- for mobile --------- */
+@media (max-width: 768px) {
+
+  .movie-layout {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .movie-layout.edit-mode {
+    justify-content: flex-start;
+  }
+
+  .movie-side,
+  .edit-side {
+    flex: 0 0 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .edit-panel {
+    position: relative; /* disable sticky on mobile */
+    top: auto;
+  }
+}
+
+
+.watchlist-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+
+  border: 1px solid #dadce0;
+  background: #fff;
+  color: #3c4043;
+
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.watchlist-btn:hover {
+  background: #f1f3f4;
+  border-color: #c6c6c6;
+}
+
+.watchlist-btn .icon {
+  font-weight: 600;
+}
+
+/* active state */
+.watchlist-btn.watched {
+  background: #e6f4ea;
+  border-color: #c7e7d0;
+  color: #137333;
 }

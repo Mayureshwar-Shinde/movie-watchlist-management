@@ -27,7 +27,9 @@ export class MovieListComponent implements OnInit {
       description: '',
       rating: 0.0,
       watched: false,
-      thumbnail: ''
+      thumbnail: '',
+      releaseDate: new Date(),
+      duration: 0
     };
   }
 
