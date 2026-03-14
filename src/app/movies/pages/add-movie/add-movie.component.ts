@@ -14,7 +14,16 @@ export class AddMovieComponent {
   @Output() addMovie: EventEmitter<Movie> = new EventEmitter();
   @Output() closeForm: EventEmitter<boolean> = new EventEmitter();
 
+  hours: number = 0;
+  minutes: number = 0;
+
+  ngOnInit() {
+    this.hours = Math.floor(this.movie.duration / 60);
+    this.minutes = this.movie.duration % 60;
+  }
+
   onSubmit() {
+    this.movie.duration = (this.hours * 60) + this.minutes;
     this.addMovie.emit(this.movie);
   }
 

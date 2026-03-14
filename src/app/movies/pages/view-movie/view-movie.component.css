@@ -267,3 +267,33 @@
     grid-template-columns: 1fr;
   }
 }
+
+.watchlist-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid #dadce0;
+  background: #fff;
+  color: #3c4043;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.watchlist-btn:hover {
+  background: #f1f3f4;
+  border-color: #c6c6c6;
+}
+
+.watchlist-btn .icon {
+  font-weight: 600;
+}
+
+.watchlist-btn.watched {
+  background: #e6f4ea;
+  border-color: #c7e7d0;
+  color: #137333;
+}

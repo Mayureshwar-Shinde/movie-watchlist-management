@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Movie } from '../../models/movie';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'movie-card',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './movie-card.component.html',
   styleUrl: './movie-card.component.css'
 })

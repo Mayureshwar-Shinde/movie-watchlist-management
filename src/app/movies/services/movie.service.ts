@@ -10,7 +10,8 @@ import { ApiResponse } from '../models/api-response';
 })
 export class MovieService {
   private httpBaseUrl = 'http://13.51.176.215:8080/movie';
-  private baseUrl = 'https://17cygbwcij.execute-api.eu-north-1.amazonaws.com/movie';
+  private httpsBaseUrl = 'https://17cygbwcij.execute-api.eu-north-1.amazonaws.com/movie';
+  private baseUrl = this.httpsBaseUrl;
 
   constructor(private http: HttpClient) { }
 

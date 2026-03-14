@@ -1,5 +1,5 @@
-import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Movie } from '../../models/movie';
 import { MovieService } from '../../services/movie.service';
@@ -8,11 +8,14 @@ import { AddMovieComponent } from '../add-movie/add-movie.component';
 @Component({
   selector: 'app-view-movie',
   standalone: true,
-  imports: [RouterLink, AddMovieComponent],
+  imports: [RouterLink, AddMovieComponent, CommonModule],
   templateUrl: './view-movie.component.html',
   styleUrl: './view-movie.component.css'
 })
 export class ViewMovieComponent implements OnInit {
+  @ViewChild('editSection') editSection!: ElementRef;
+  @ViewChild('screenshotsSection') screenshotsSection!: ElementRef;
+  
   movie!: Movie;
   screenshots: string[] = [];
   movieId: number = 0;
@@ -49,14 +52,24 @@ export class ViewMovieComponent implements OnInit {
     return [1, 2, 3, 4].map((index) => `https://picsum.photos/seed/${seed}-shot-${index}/720/405`);
   }
 
+  private scrollTo(element: ElementRef | undefined): void {
+    if (!element) return;
+    setTimeout(() => {
+      element.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
+
   toggleScreenshots(): void {
     this.showScreenshots = !this.showScreenshots;
+    this.scrollTo(this.screenshotsSection);
   }
 
   startEdit(): void {
     this.editingMovie = { ...this.movie };
-    if(this.isEditing == true) this.isEditing = false
-    else this.isEditing = true;
+    this.isEditing = !this.isEditing;
+    setTimeout(() => {
+      this.editSection.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
   }
 
   cancelEdit(): void {
@@ -89,5 +102,17 @@ export class ViewMovieComponent implements OnInit {
       return;
     }
     this.router.navigateByUrl('/');
+  }
+
+  formatDuration(minutes: number): string {
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    if (h === 0) return `${m}m`;
+    return `${h}h ${m}m`;
+  }
+
+  toggleWatched() {
+    this.movie.watched = !this.movie.watched;
+    this.saveMovie(this.movie);
   }
 }

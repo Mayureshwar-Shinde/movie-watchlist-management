@@ -6,6 +6,8 @@ export interface Movie {
   rating: number;
   watched: boolean;
   thumbnail: string;
+  releaseDate: Date;
+  duration: number;
 }
 
 export interface CreateMovie {
@@ -14,6 +16,8 @@ export interface CreateMovie {
   rating: number;
   watched: boolean;
   thumbnail: string;
+  releaseDate: Date;
+  duration: number;
 }
 
 

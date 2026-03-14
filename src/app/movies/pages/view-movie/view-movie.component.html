@@ -24,15 +24,17 @@
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 watch-meta-row">
           <div class="watch-meta">
             <span class="value">⭐ {{ movie.rating }}/10</span>
-            <span class="dot">•</span>
-            <span class="date">25 Nov 2025</span>
-            <span class="dot">•</span>
-            <span class="watch-badge" [class.watched]="movie.watched">
-              {{ movie.watched ? 'Watched' : 'In watchlist' }}
-            </span>
+            <span class="dot text-dark">•</span>
+            <span class="duration">⏱  {{ formatDuration(movie.duration) }} </span>
+            <span class="dot text-dark">•</span>
+            <span class="date">{{ movie.releaseDate | date:'d MMM y' }}</span>
           </div>
 
           <div class="d-flex align-items-center gap-2">
+            <button type="button" class="watchlist-btn" [class.watched]="movie.watched" (click)="toggleWatched()">
+              <span class="icon">{{ movie.watched ? '✓' : '+' }}</span>
+              <span>{{ movie.watched ? 'Watched' : 'Watched' }}</span>
+            </button>
             <button type="button" class="btn-edit-movie" (click)="startEdit()">{{ isEditing ? 'Close x' : 'Edit'}}</button>
             <button type="button" class="btn-delete-movie" (click)="deleteMovie()">Delete</button>
           </div>
@@ -50,7 +52,7 @@
         </div>
 
         @if (isEditing) {
-          <div class="edit-section mt-4">
+          <div #editSection class="edit-section mt-4">
             <h5 class="mb-3">Edit movie</h5>
             <add-movie [movie]="editingMovie" (addMovie)="saveMovie($event)" (closeForm)="cancelEdit()"></add-movie>
           </div>
@@ -58,7 +60,7 @@
 
         <!-- Screenshots (spoiler-protected) -->
         @if(screenshots.length) {
-          <div class="screenshots-spoiler mt-4">
+          <div #screenshotsSection class="screenshots-spoiler mt-4">
             <button type="button" class="btn-toggle-screenshots" (click)="toggleScreenshots()">
               {{ showScreenshots ? 'Hide screenshots' : 'Reveal screenshots (may contain spoilers)' }}
             </button>

@@ -7,9 +7,7 @@
     @if (movie.watched) {
       <span class="status-badge">✓</span>
     }
-    <span class="release-date">
-      25 Nov 2026
-    </span>
+    <span class="release-date">{{ movie.releaseDate | date:'d MMM y' }}</span>
   </div>
   
   <div class="movie-card-body mt-2">
