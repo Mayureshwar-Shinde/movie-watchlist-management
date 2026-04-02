@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,34 +13,39 @@ export class MovieService {
   private httpsBaseUrl = 'https://noncommissioned-claudette-unremote.ngrok-free.dev/movie';
   private baseUrl = this.httpsBaseUrl;
 
+  // ✅ Add ngrok header here
+  private headers = new HttpHeaders({
+    'ngrok-skip-browser-warning': 'true'
+  });
+
   constructor(private http: HttpClient) { }
 
   getAllMovies(): Observable<Movie[]> {
-    return this.http.get<ApiResponse<Movie[]>>(this.baseUrl).pipe(
+    return this.http.get<ApiResponse<Movie[]>>(this.baseUrl, { headers: this.headers }).pipe(
       map(response => response.data)
     );
   }
 
   getMovie(id: number): Observable<Movie> {
-    return this.http.get<ApiResponse<Movie>>(`${this.baseUrl}/${id}`).pipe(
+    return this.http.get<ApiResponse<Movie>>(`${this.baseUrl}/${id}`, { headers: this.headers }).pipe(
       map(response => response.data)
     );
   }
 
   addMovie(movie: CreateMovie): Observable<Movie> {
-    return this.http.post<ApiResponse<Movie>>(this.baseUrl, movie).pipe(
+    return this.http.post<ApiResponse<Movie>>(this.baseUrl, movie, { headers: this.headers }).pipe(
       map(response => response.data)
     );
   }
 
   updateMovie(movie: Movie): Observable<Movie> {
-    return this.http.put<ApiResponse<Movie>>(`${this.baseUrl}/${movie.id}`, movie).pipe(
+    return this.http.put<ApiResponse<Movie>>(`${this.baseUrl}/${movie.id}`, movie, { headers: this.headers }).pipe(
       map(response => response.data)
     );
   }
 
   deleteMovie(id: number): Observable<void> {
-    return this.http.delete<ApiResponse<void>>(`${this.baseUrl}/${id}`).pipe(
+    return this.http.delete<ApiResponse<void>>(`${this.baseUrl}/${id}`, { headers: this.headers }).pipe(
       map(() => undefined)
     );
   }
