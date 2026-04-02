@@ -9,8 +9,8 @@ import { ApiResponse } from '../models/api-response';
   providedIn: 'root'
 })
 export class MovieService {
-  private httpBaseUrl = 'http://13.51.176.215:8080/movie';
-  private httpsBaseUrl = 'https://17cygbwcij.execute-api.eu-north-1.amazonaws.com/movie';
+  private httpBaseUrl = 'http://34.31.59.185:8080/movie';
+  private httpsBaseUrl = 'https://noncommissioned-claudette-unremote.ngrok-free.dev/movie';
   private baseUrl = this.httpsBaseUrl;
 
   constructor(private http: HttpClient) { }
